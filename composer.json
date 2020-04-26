@@ -1,0 +1,33 @@
+{
+    "name": "wojciechem/paynow-simple",
+    "description": "simple PHP client for paynow API",
+    "type": "library",
+    "require": {
+        "php-http/guzzle6-adapter": "^2.0",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.1",
+        "php-http/mock-client": "^1.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "wojciechem",
+            "email": "wmiedzybrodzki@outlook.com"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "PaynowSimple\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PaynowSimple\\": "tests/"
+        }
+    }
+}
