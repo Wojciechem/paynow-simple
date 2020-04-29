@@ -10,7 +10,7 @@ class Currency
 
     public function __construct(string $currencyCode)
     {
-        if (\mb_strlen($currencyCode) !== 3) {
+        if (3 !== \mb_strlen($currencyCode)) {
             throw new InvalidArgument('Please provide valid ISO-4217 currency code');
         }
 

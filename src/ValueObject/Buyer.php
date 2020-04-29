@@ -15,7 +15,7 @@ class Buyer implements \JsonSerializable
         $this->email = $email;
     }
 
-    public function addFirstName(string $firstName) : Buyer
+    public function addFirstName(string $firstName): Buyer
     {
         $buyer = clone $this;
         $buyer->firstName = $firstName;
@@ -23,7 +23,7 @@ class Buyer implements \JsonSerializable
         return $buyer;
     }
 
-    public function addLastName(string $lastName) : Buyer
+    public function addLastName(string $lastName): Buyer
     {
         $buyer = clone $this;
         $buyer->lastName = $lastName;
@@ -31,7 +31,7 @@ class Buyer implements \JsonSerializable
         return $buyer;
     }
 
-    public function addPhone(Phone $phone) : Buyer
+    public function addPhone(Phone $phone): Buyer
     {
         $buyer = clone $this;
         $buyer->phone = $phone;

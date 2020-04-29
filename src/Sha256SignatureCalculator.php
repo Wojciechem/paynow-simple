@@ -11,7 +11,7 @@ class Sha256SignatureCalculator implements SignatureCalculator
         $this->signatureKey = $signatureKey;
     }
 
-    public function calculate(array $data) : string
+    public function calculate(array $data): string
     {
         return \base64_encode(\hash_hmac('sha256', \json_encode($data), $this->signatureKey, true));
     }

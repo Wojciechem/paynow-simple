@@ -10,7 +10,7 @@ class PaymentId
 
     public function __construct(string $id)
     {
-        if (\mb_strlen($id) !== 16) {
+        if (16 !== \mb_strlen($id)) {
             throw new InvalidArgument('Not a valid Paynow paymentId');
         }
 

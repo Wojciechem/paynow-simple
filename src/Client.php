@@ -13,7 +13,8 @@ use PaynowSimple\ValueObject\Response\PaymentStatus;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 
-class Client {
+class Client
+{
     private $client;
     private $signatureCalculator;
     private $apiKey;
@@ -34,11 +35,11 @@ class Client {
         $this->requestFactory = $requestFactory;
     }
 
-    private static function template(string $baseUri, string $apiKey, string $signature) : self
+    private static function template(string $baseUri, string $apiKey, string $signature): self
     {
         $guzzleClient = new \GuzzleHttp\Client([
             'base_uri' => $baseUri,
-            'timeout'  => 20,
+            'timeout' => 20,
         ]);
         $clientAdapter = new GuzzleClientAdapter($guzzleClient);
         $signatureCalculator = new Sha256SignatureCalculator($signature);
@@ -56,7 +57,7 @@ class Client {
         return self::template(self::SANDBOX_URL, $apiKey, $signature);
     }
 
-    public function makePayment(Payment $payment) : PaymentResponse
+    public function makePayment(Payment $payment): PaymentResponse
     {
         $request = $this->requestFactory->createRequest(
             'POST',

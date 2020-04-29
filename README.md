@@ -7,19 +7,21 @@ Meant as more straightforward, yet type-safe alternative to official paynow-php-
 
 ### TODO:
 - consider curl http client implementation instead of Guzzle as default (more lightweight?)
-- phpcs
 - psalm
 - github actions?
 
 ### Usage:
 Starting a payment:
 ```php
-$client = PaynowSimple\Client::create(
+use PaynowSimple\Client as PaynowClient;
+use PaynowSimple\ValueObject\Payment;
+
+$client = PaynowClient::create(
     'apiKey',
     'signatureKey'
 );
 
-$payment = \PaynowSimple\ValueObject\Payment::create(
+$payment = Payment::create(
     10000,
     'PLN',
     'ORDER-0001',

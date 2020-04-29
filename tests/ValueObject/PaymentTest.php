@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \PaynowSimple\ValueObject\Payment
+ *
  * @uses \PaynowSimple\ValueObject\Amount
  * @uses \PaynowSimple\ValueObject\Buyer
  * @uses \PaynowSimple\ValueObject\Currency
@@ -26,8 +27,8 @@ class PaymentTest extends TestCase
                 'externalId' => 'AE101',
                 'description' => '...',
                 'buyer' => [
-                    'email' => 'test@box.invalid'
-                ]
+                    'email' => 'test@box.invalid',
+                ],
             ],
             $payment->asArray()
         );
@@ -39,8 +40,8 @@ class PaymentTest extends TestCase
                 'externalId' => 'AE101',
                 'description' => '...',
                 'buyer' => [
-                    'email' => 'test@box.invalid'
-                ]
+                    'email' => 'test@box.invalid',
+                ],
             ],
             $payment->jsonSerialize()
         );

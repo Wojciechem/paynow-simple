@@ -49,7 +49,7 @@ class Payment implements \JsonSerializable
         );
     }
 
-    public function asArray() : array
+    public function asArray(): array
     {
         return [
             'amount' => $this->amount->amount(),

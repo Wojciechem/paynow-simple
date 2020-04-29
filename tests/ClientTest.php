@@ -10,6 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * @covers \PaynowSimple\Client
+ *
  * @uses \GuzzleHttp\Client
  * @uses \Http\Adapter\Guzzle6\Client
  * @uses \PaynowSimple\Sha256SignatureCalculator
@@ -39,8 +40,9 @@ class ClientTest extends TestCase
         $payment = $this->createMock(Payment::class);
         $client = new Client($httpClient, 'apikey', $calculator, $factory);
         $response = $this->createMock(ResponseInterface::class);
-        $response->method('getBody')->willReturn(new class {
-            public function getContents(){
+        $response->method('getBody')->willReturn(new class() {
+            public function getContents()
+            {
                 return '{"paymentId": "abcdef", "status": "NEW"}';
             }
         });

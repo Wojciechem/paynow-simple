@@ -8,6 +8,7 @@ class BuyerTest extends TestCase
 {
     /**
      * @covers \PaynowSimple\ValueObject\Buyer
+     *
      * @uses \PaynowSimple\ValueObject\Phone
      */
     public function testCanCreateElaborateBuyer()
@@ -26,7 +27,7 @@ class BuyerTest extends TestCase
                 'phone' => [
                     'prefix' => '+48',
                     'number' => 999999999,
-                ]
+                ],
             ],
             $buyer->jsonSerialize()
         );

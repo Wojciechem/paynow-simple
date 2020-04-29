@@ -18,17 +18,17 @@ class PaymentResponse
         }
     }
 
-    public function paymentId() : string
+    public function paymentId(): string
     {
         return $this->content['paymentId'];
     }
 
-    public function status() : string
+    public function status(): string
     {
         return $this->content['status'];
     }
 
-    public function redirectUrl() : ?string
+    public function redirectUrl(): ?string
     {
         if (array_key_exists('redirectUrl', $this->content)) {
             return $this->content['redirectUrl'];
