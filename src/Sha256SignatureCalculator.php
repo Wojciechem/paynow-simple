@@ -2,7 +2,7 @@
 
 namespace PaynowSimple;
 
-class Sha256SignatureCalculator implements SignatureCalculator
+final class Sha256SignatureCalculator implements SignatureCalculator
 {
     private $signatureKey;
 

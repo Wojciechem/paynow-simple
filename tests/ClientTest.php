@@ -4,6 +4,7 @@ namespace PaynowSimple;
 
 use Http\Message\RequestFactory;
 use PaynowSimple\ValueObject\Payment;
+use PaynowSimple\ValueObject\Response\PaymentResponse;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -31,16 +32,15 @@ class ClientTest extends TestCase
         $this->assertInstanceOf(Client::class, $client);
     }
 
-    // TODO: fragile test, think how to rewrite it
+    // TODO: fragile test with lots of mocks, what problem does it indicate?
     public function testCanMakePayment()
     {
         $httpClient = new \Http\Mock\Client();
         $calculator = $this->createMock(SignatureCalculator::class);
         $factory = $this->createMock(RequestFactory::class);
-        $payment = $this->createMock(Payment::class);
         $client = new Client($httpClient, 'apikey', $calculator, $factory);
-        $response = $this->createMock(ResponseInterface::class);
-        $response->method('getBody')->willReturn(new class() {
+        $httpResponse = $this->createMock(ResponseInterface::class);
+        $httpResponse->method('getBody')->willReturn(new class() {
             public function getContents()
             {
                 return '{"paymentId": "abcdef", "status": "NEW"}';
@@ -51,11 +51,19 @@ class ClientTest extends TestCase
             ->method('createRequest')
             ->willReturn($this->createMock(RequestInterface::class))
         ;
-        $payment->expects(self::once())->method('asArray');
-        $payment->expects(self::once())->method('jsonSerialize');
         $calculator->expects(self::once())->method('calculate');
-        $httpClient->setDefaultResponse($response);
+        $httpClient->setDefaultResponse($httpResponse);
 
-        $client->makePayment($payment);
+        $paymentResponse = $client->makePayment(
+            Payment::create(
+                1000,
+                'PLN',
+                '00-1249',
+                '...',
+                'tester@acme.invalid'
+            )
+        );
+
+        $this->assertInstanceOf(PaymentResponse::class, $paymentResponse);
     }
 }

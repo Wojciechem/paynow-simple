@@ -5,7 +5,7 @@ namespace PaynowSimple\ValueObject;
 use PaynowSimple\Exception\InvalidArgument;
 
 // TODO: rename to fix "lI" problem. Also, this ID is external to Paynow, not API consumer
-class ExternalId
+final class ExternalId
 {
     private $id;
 

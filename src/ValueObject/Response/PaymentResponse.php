@@ -5,7 +5,7 @@ namespace PaynowSimple\ValueObject\Response;
 use PaynowSimple\Exception\InvalidArgument;
 use Psr\Http\Message\ResponseInterface;
 
-class PaymentResponse
+final class PaymentResponse
 {
     private $content;
 

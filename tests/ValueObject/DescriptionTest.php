@@ -22,10 +22,10 @@ class DescriptionTest extends TestCase
         $this->expectException(InvalidArgument::class);
 
         new Description(<<<'TEXT'
+This is invalid message, which i promise is 256 characters long
+This is invalid message, which i promise is 256 characters long
+This is invalid message, which i promise is 256 characters long
 This is invalid message, which i promise is 256 characters long.
-This is invalid message, which i promise is 256 characters long
-This is invalid message, which i promise is 256 characters long
-Please keep in mind that line breaks also count.............
 TEXT
 );
     }

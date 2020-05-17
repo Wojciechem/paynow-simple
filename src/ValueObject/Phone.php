@@ -4,7 +4,7 @@ namespace PaynowSimple\ValueObject;
 
 use PaynowSimple\Exception\InvalidArgument;
 
-class Phone
+final class Phone
 {
     private $prefix;
     private $number;

@@ -2,7 +2,7 @@
 
 namespace PaynowSimple\ValueObject;
 
-class Payment implements \JsonSerializable
+final class Payment implements \JsonSerializable
 {
     /** @var Buyer */
     private $buyer;

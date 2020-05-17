@@ -13,7 +13,7 @@ use PaynowSimple\ValueObject\Response\PaymentStatus;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 
-class Client
+final class Client
 {
     private $client;
     private $signatureCalculator;
@@ -57,6 +57,9 @@ class Client
         return self::template(self::SANDBOX_URL, $apiKey, $signature);
     }
 
+    /**
+     * @throws ClientException
+     */
     public function makePayment(Payment $payment): PaymentResponse
     {
         $request = $this->requestFactory->createRequest(
@@ -80,6 +83,9 @@ class Client
         return new PaymentResponse($response);
     }
 
+    /**
+     * @throws ClientException
+     */
     public function paymentStatus(PaymentId $id)
     {
         $request = $this->requestFactory->createRequest(

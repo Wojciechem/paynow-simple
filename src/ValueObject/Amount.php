@@ -4,7 +4,7 @@ namespace PaynowSimple\ValueObject;
 
 use PaynowSimple\Exception\InvalidArgument;
 
-class Amount
+final class Amount
 {
     private $amount;
 

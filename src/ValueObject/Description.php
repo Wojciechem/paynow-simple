@@ -4,7 +4,7 @@ namespace PaynowSimple\ValueObject;
 
 use PaynowSimple\Exception\InvalidArgument;
 
-class Description
+final class Description
 {
     private $description;
 

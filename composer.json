@@ -3,6 +3,7 @@
     "description": "simple PHP client for paynow API",
     "type": "library",
     "require": {
+        "php-http/client-implementation": "^1.0",
         "php-http/guzzle6-adapter": "^2.0",
         "ext-json": "*"
     },
