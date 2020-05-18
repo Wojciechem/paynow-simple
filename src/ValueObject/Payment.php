@@ -38,8 +38,8 @@ final class Payment implements \JsonSerializable
         string $currencyCode,
         string $externalId,
         string $description,
-        string $email)
-    {
+        string $email
+    ): self {
         return new self(
             new Amount($amount),
             new Currency($currencyCode),

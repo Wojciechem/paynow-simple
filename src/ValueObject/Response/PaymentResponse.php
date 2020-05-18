@@ -7,6 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 
 final class PaymentResponse
 {
+    /** @var array */
     private $content;
 
     public function __construct(ResponseInterface $response)

@@ -6,6 +6,7 @@ use PaynowSimple\Exception\InvalidArgument;
 
 final class Amount
 {
+    /** @var int */
     private $amount;
 
     public function __construct(int $amount)

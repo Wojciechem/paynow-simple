@@ -6,6 +6,7 @@ use PaynowSimple\Exception\InvalidArgument;
 
 final class Description
 {
+    /** @var string */
     private $description;
 
     public function __construct(string $description)

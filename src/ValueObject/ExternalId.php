@@ -7,6 +7,7 @@ use PaynowSimple\Exception\InvalidArgument;
 // TODO: rename to fix "lI" problem. Also, this ID is external to Paynow, not API consumer
 final class ExternalId
 {
+    /** @var string */
     private $id;
 
     public function __construct(string $id)

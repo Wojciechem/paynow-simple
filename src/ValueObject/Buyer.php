@@ -4,10 +4,16 @@ namespace PaynowSimple\ValueObject;
 
 final class Buyer implements \JsonSerializable
 {
+    /** @var string */
     private $email;
+
+    /** @var string | null */
     private $firstName;
+
+    /** @var string | null */
     private $lastName;
-    /** @var Phone */
+
+    /** @var Phone | null */
     private $phone;
 
     public function __construct(string $email)

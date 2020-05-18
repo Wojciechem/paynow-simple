@@ -6,6 +6,7 @@ use PaynowSimple\Exception\InvalidArgument;
 
 final class Currency
 {
+    /** @var string */
     private $currencyCode;
 
     public function __construct(string $currencyCode)

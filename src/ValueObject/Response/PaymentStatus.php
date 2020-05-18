@@ -7,6 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 
 final class PaymentStatus
 {
+    /** @var array */
     private $content;
 
     public function __construct(ResponseInterface $response)
@@ -18,12 +19,12 @@ final class PaymentStatus
         }
     }
 
-    public function paymentId()
+    public function paymentId(): string
     {
         return $this->content['paymentId'];
     }
 
-    public function status()
+    public function status(): string
     {
         return $this->content['status'];
     }

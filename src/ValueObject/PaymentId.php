@@ -6,6 +6,7 @@ use PaynowSimple\Exception\InvalidArgument;
 
 final class PaymentId
 {
+    /** @var string */
     private $id;
 
     public function __construct(string $id)

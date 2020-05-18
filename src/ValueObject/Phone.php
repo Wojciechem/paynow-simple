@@ -6,7 +6,10 @@ use PaynowSimple\Exception\InvalidArgument;
 
 final class Phone
 {
+    /** @var string */
     private $prefix;
+
+    /** @var int */
     private $number;
 
     public function __construct(string $prefix, int $number)

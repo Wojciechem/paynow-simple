@@ -2,5 +2,6 @@
 .gitignore         export-ignore
 .gitattributes     export-ignore
 .php_cs.dist       export-ignore
+psalm.xml          export-ignore
 phpunit.xml        export-ignore
 tests/             export-ignore
