@@ -27,4 +27,4 @@ jobs:
       run: vendor/bin/psalm --threads=8 --show-info=true
 
     - name: Code style
-      run: vendor/bin/php-cs-fixer fix --dry-run
+      run: vendor/bin/php-cs-fixer fix --dry-run --diff --diff-format=udiff
