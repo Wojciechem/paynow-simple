@@ -12,20 +12,28 @@ final class PaymentStatus
 
     public function __construct(ResponseInterface $response)
     {
-        $this->content = json_decode($response->getBody()->getContents(), true);
+        $this->content = (array) \json_decode($response->getBody()->getContents(), true);
 
-        if (null === $this->content) {
+        if ([] === $this->content) {
             throw new InvalidArgument('Empty response from Paynow API');
+        }
+
+        if (false === \array_key_exists('paymentId', $this->content)) {
+            throw new InvalidArgument('missing paymentId in response');
+        }
+
+        if (false === \array_key_exists('status', $this->content)) {
+            throw new InvalidArgument('missing status in response');
         }
     }
 
     public function paymentId(): string
     {
-        return $this->content['paymentId'];
+        return (string) $this->content['paymentId'];
     }
 
     public function status(): string
     {
-        return $this->content['status'];
+        return (string) $this->content['status'];
     }
 }

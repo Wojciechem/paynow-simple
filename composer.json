@@ -5,7 +5,6 @@
     "require": {
         "php-http/client-implementation": "^1.0",
         "php-http/guzzle6-adapter": "^2.0",
-        "ext-json": "*",
         "php": ">=7.1"
     },
     "require-dev": {

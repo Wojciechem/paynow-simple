@@ -46,9 +46,9 @@ class PaymentStatusNotification
         }
 
         $content = file_get_contents('php://input');
-        $data = \json_decode($content, true);
+        $data = (array) \json_decode($content, true);
 
-        if (null === $data) {
+        if ([] === $data) {
             throw new InvalidArgument('Invalid JSON payload in received notification');
         }
 
@@ -69,11 +69,11 @@ class PaymentStatusNotification
         }
 
         return new self(
-            $_SERVER['HTTP_SIGNATURE'],
-            new PaymentId($data['paymentId']),
-            new ExternalId($data['externalId']),
-            $data['status'],
-            $data['modifiedAt']
+            (string) $_SERVER['HTTP_SIGNATURE'],
+            new PaymentId((string) $data['paymentId']),
+            new ExternalId((string) $data['externalId']),
+            (string) $data['status'],
+            (string) $data['modifiedAt']
         );
     }
 
