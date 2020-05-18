@@ -9,25 +9,23 @@ use PaynowSimple\ValueObject\Notification\PaymentStatusNotification;
 
 final class NotificationHandler
 {
-    /** @var SignatureCalculator */
-    private $calculator;
+    private $signatureKey;
 
-    public function __construct(SignatureCalculator $calculator)
+    public function __construct(string $signatureKey)
     {
-        $this->calculator = $calculator;
+        $this->signatureKey = $signatureKey;
     }
 
-    public static function create(string $signatureKey): self
-    {
-        return new self(new Sha256SignatureCalculator($signatureKey));
-    }
-
-    /** @return void */
+    /**
+     * @return void
+     *
+     * @throws InvalidSignature
+     */
     public function handle()
     {
         $notification = PaymentStatusNotification::createFromGlobals();
 
-        $calculatedSignature = $this->calculator->calculate($notification->asArray());
+        $calculatedSignature = Sha256SignatureCalculator::calculate($this->signatureKey, $notification->asArray());
 
         if ($calculatedSignature !== $notification->signature()) {
             throw new InvalidSignature('Notification signature does not match calculated signature!');

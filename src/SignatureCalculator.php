@@ -4,5 +4,5 @@ namespace PaynowSimple;
 
 interface SignatureCalculator
 {
-    public function calculate(array $data): string;
+    public static function calculate(string $signatureKey, array $data): string;
 }

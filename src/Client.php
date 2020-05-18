@@ -2,8 +2,6 @@
 
 namespace PaynowSimple;
 
-use Http\Adapter\Guzzle6\Client as GuzzleClientAdapter;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Message\RequestFactory;
 use PaynowSimple\Exception\ClientException;
 use PaynowSimple\ValueObject\Payment;
@@ -16,45 +14,20 @@ use Psr\Http\Client\ClientInterface;
 final class Client
 {
     private $client;
-    private $signatureCalculator;
     private $apiKey;
+    private $signatureKey;
     private $requestFactory;
-
-    private const API_URL = 'https://api.paynow.pl';
-    private const SANDBOX_URL = 'https://api.sandbox.paynow.pl';
 
     public function __construct(
         ClientInterface $client,
         string $apiKey,
-        SignatureCalculator $signatureCalculator,
+        string $signatureKey,
         RequestFactory $requestFactory
     ) {
         $this->client = $client;
-        $this->signatureCalculator = $signatureCalculator;
         $this->apiKey = $apiKey;
+        $this->signatureKey = $signatureKey;
         $this->requestFactory = $requestFactory;
-    }
-
-    private static function template(string $baseUri, string $apiKey, string $signature): self
-    {
-        $guzzleClient = new \GuzzleHttp\Client([
-            'base_uri' => $baseUri,
-            'timeout' => 20,
-        ]);
-        $clientAdapter = new GuzzleClientAdapter($guzzleClient);
-        $signatureCalculator = new Sha256SignatureCalculator($signature);
-
-        return new self($clientAdapter, $apiKey, $signatureCalculator, new GuzzleMessageFactory());
-    }
-
-    public static function create(string $apiKey, string $signature)
-    {
-        return self::template(self::API_URL, $apiKey, $signature);
-    }
-
-    public static function sandbox(string $apiKey, string $signature)
-    {
-        return self::template(self::SANDBOX_URL, $apiKey, $signature);
     }
 
     /**
@@ -67,7 +40,7 @@ final class Client
             '/v1/payments',
             [
                 'Api-Key' => $this->apiKey,
-                'Signature' => $this->signatureCalculator->calculate($payment->asArray()),
+                'Signature' => Sha256SignatureCalculator::calculate($this->signatureKey, $payment->asArray()),
                 'Idempotency-Key' => $payment->externalId()->id(),
                 'Content-Type' => 'application/json',
             ],
@@ -86,7 +59,7 @@ final class Client
     /**
      * @throws ClientException
      */
-    public function paymentStatus(PaymentId $id)
+    public function paymentStatus(PaymentId $id): PaymentStatus
     {
         $request = $this->requestFactory->createRequest(
             'GET',

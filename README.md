@@ -13,14 +13,11 @@ You can use any compatible http client through constructor injection.
 First: use [composer autoloading](https://getcomposer.org/doc/01-basic-usage.md#autoloading)
 #### Starting a payment:
 ```php
-use PaynowSimple\Client as PaynowClient;
+use PaynowSimple\ClientFactory as PaynowClientFactory;
 use PaynowSimple\ValueObject\Payment;
 use PaynowSimple\Exception\ClientException;
 
-$client = PaynowClient::create(
-    'apiKey',
-    'signatureKey'
-);
+$client = PaynowClientFactory::default()->create('api-key', 'signature-key');
 
 $payment = Payment::create(
     10000,
@@ -43,7 +40,7 @@ use PaynowSimple\Exception\InvalidArgument;
 use PaynowSimple\NotificationHandler;
 
 try {
-    $handler = NotificationHandler::create('my signature key');
+    $handler = new NotificationHandler('my signature key');
     $handler->handle();
 
     // proceed with payment processing

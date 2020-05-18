@@ -2,7 +2,7 @@
 
 namespace PaynowSimple\EndToEnd;
 
-use PaynowSimple\Client;
+use PaynowSimple\ClientFactory;
 use PaynowSimple\ValueObject\Payment;
 use PaynowSimple\ValueObject\PaymentId;
 use PaynowSimple\ValueObject\Response\PaymentResponse;
@@ -33,7 +33,7 @@ class SandboxTest extends TestCase
 
     public function testPaymentScenarioIsSuccesful()
     {
-        $client = Client::sandbox($this->apiKey, $this->signature);
+        $client = ClientFactory::sandbox()->create($this->apiKey, $this->signature);
         $externalId = 'SANDBOX_TEST-';
         $externalId .= (string) mt_rand(1, 100000000);
 

@@ -4,15 +4,8 @@ namespace PaynowSimple;
 
 final class Sha256SignatureCalculator implements SignatureCalculator
 {
-    private $signatureKey;
-
-    public function __construct(string $signatureKey)
+    public static function calculate(string $signatureKey, array $data): string
     {
-        $this->signatureKey = $signatureKey;
-    }
-
-    public function calculate(array $data): string
-    {
-        return \base64_encode(\hash_hmac('sha256', \json_encode($data), $this->signatureKey, true));
+        return \base64_encode(\hash_hmac('sha256', \json_encode($data), $signatureKey, true));
     }
 }
